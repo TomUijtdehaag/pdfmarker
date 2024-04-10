@@ -1,3 +1,6 @@
+[![CI](https://github.com/TomUijtdehaag/pdfmarker/actions/workflows/ci.yml/badge.svg)](https://github.com/TomUijtdehaag/pdfmarker/actions/workflows/ci.yml)
+
+
 # pdfmarker
 Simple PDF marker written in Python. Based on the PyMuPDF/fitz library.
 
