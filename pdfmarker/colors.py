@@ -1,3 +1,6 @@
+from __future__ import annotations
+
+
 class Color:
     def __init__(
         self, hex: str | None, rgb: tuple[float, float, float] | None = None
