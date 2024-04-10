@@ -41,6 +41,9 @@ marker.to_disk("example_marked.pdf")
 
 ```
 
+## To-do
+1. Add codecov
+
 ## Contributing
 Contributions are welcome! If you would like to contribute to pdfmarker, please follow these steps:
 
