@@ -4,6 +4,9 @@ version = "0.1.2"
 description = "Simple tool to mark/add highlights to pdf documents."
 authors = ["Tom Uijtdehaag <tjl.udh@gmail.com>"]
 readme = "README.md"
+license = "GNU General Public License v3.0"
+homepage = "https://github.com/TomUijtdehaag/pdfmarker"
+
 
 [tool.poetry.dependencies]
 python = "^3.8.1"
