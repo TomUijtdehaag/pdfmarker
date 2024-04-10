@@ -1,5 +1,4 @@
 from hashlib import md5
-from io import BytesIO
 
 from pdfmarker import Colors, Highlight, Marker
 
