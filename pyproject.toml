@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pdfmarker"
-version = "0.1.2"
+version = "0.1.3"
 description = "Simple tool to mark/add highlights to pdf documents."
 authors = ["Tom Uijtdehaag <tjl.udh@gmail.com>"]
 readme = "README.md"
