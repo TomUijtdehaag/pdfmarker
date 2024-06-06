@@ -47,7 +47,7 @@ marker.to_disk("example_marked.pdf")
 ## Contributing
 Contributions are welcome! If you would like to contribute to pdfmarker, please follow these steps:
 
-1. Fork the repository on GitHub.
+1. Fork the repository on GitHub. [https://github.com/TomUijtdehaag/pdfmarker](https://github.com/TomUijtdehaag/pdfmarker)
 2. Clone your forked repository to your local machine.
 3. Create a new branch for your changes.
 4. Make your changes and commit them with descriptive commit messages.

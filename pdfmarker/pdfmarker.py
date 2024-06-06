@@ -14,18 +14,18 @@ from .colors import Color, Colors
 class Highlight:
     text: str
     color: Color = Colors.yellow
-    group: str = None
+    group: str | None = None
     subwords: bool = False
 
 
 class Marker:
-    def __init__(self, file: bytes, path: Path = None) -> None:
+    def __init__(self, file: bytes, path: Path | None = None) -> None:
         self.file = file
         self.path = path
         self.highlights: set[Highlight] = set()
 
     @classmethod
-    def from_bytes(cls, file: bytes, *args, **kwargs) -> "Marker":
+    def from_bytes(cls, file: bytes) -> "Marker":
         """
         Create a Marker instance from a bytes object.
 
@@ -35,20 +35,20 @@ class Marker:
         Returns:
             Marker: A Marker instance.
         """
-        return cls(file, *args, **kwargs)
+        return cls(file)
 
     @classmethod
-    def from_disk(cls, path: str | Path, *args, **kwargs) -> "Marker":
+    def from_disk(cls, path: str | Path) -> "Marker":
         """Create a Marker instance from a file on disk.
         Args:
             path (str | Path): Path to the file on disk.
-            
+
             Returns:
             Marker: A Marker instance."""
         if isinstance(path, str):
             path = Path(path)
         with open(path, "rb") as file:
-            return cls(file.read(), path, *args, **kwargs)
+            return cls(file.read(), path)
 
     def add(self, highlights: Highlight | Iterable[Highlight] | str) -> None:
         """
@@ -70,8 +70,8 @@ class Marker:
 
         self.highlights.update(highlights)
 
-    def _mark(self) -> None:
-        def add_highlight(page: Page, quad: Quad, color: Color | None = None):
+    def _mark(self) -> bytes:
+        def add_highlight(page: Page, quad: Quad, color: Color):
             annot = page.add_highlight_annot(quad)
             annot.set_colors(
                 {
@@ -120,7 +120,7 @@ class Marker:
         return re.sub(r"\W+", "", word).lower()
 
     @staticmethod
-    def _add_groups(page: Page, groups: list[tuple[str, Color]]):
+    def _add_groups(page: Page, groups: Iterable[tuple[str, Color]]):
         page.clean_contents()
 
         # Starting position for the first group
@@ -156,9 +156,12 @@ class Marker:
         Returns:
             None
         """
-        if not path:
+        if path is None and self.path is not None:
             name = f"{self.path.stem}_marked{self.path.suffix}"
             path = self.path.with_name(name)
+
+        if path is None:
+            raise ValueError("path must be provided")
 
         if isinstance(path, str):
             path = Path(path)

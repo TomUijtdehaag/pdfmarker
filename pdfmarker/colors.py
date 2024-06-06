@@ -10,18 +10,27 @@ class Color:
         Args:
             hex (str): Hex value of the color.
             rgb (tuple[float, float, float]): RGB value of the color."""
-        if not hex and not rgb:
+        if hex is None and rgb is None:
             raise ValueError("hex or rgb must be provided")
 
-        self.hex = hex
-        self.rgb = rgb or self._rgb(hex)
+        if hex is not None:
+            self.hex = hex
+            self.rgb = self._rgb(hex)
+
+        if rgb is not None:
+            self.rgb = rgb
+            self.hex = self._hex(rgb)
 
     @staticmethod
-    def _rgb(hex: str) -> tuple[float, float, float]:
+    def _rgb(hex: str) -> tuple[float, ...]:
         hex = hex.lstrip("#")
         return tuple(int(hex[i : i + 2], 16) / 255 for i in (0, 2, 4))
 
-    def __hash__(self) -> bool:
+    @staticmethod
+    def _hex(rgb: tuple[float, ...]) -> str:
+        return "#" + "".join(f"{int(i * 255):02x}" for i in rgb)
+
+    def __hash__(self) -> int:
         return hash(self.rgb)
 
 
