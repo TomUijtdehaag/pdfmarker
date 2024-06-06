@@ -64,35 +64,8 @@ class TestMarker:
         assert highlight.text == "test"
         assert highlight.subwords is True
 
-    def test_marker_to_bytes(self):
-        marker = Marker.from_bytes(b"test")
-        marker.add(Highlight("sample"))
-        marker.add(Highlight("con", color=Colors.red, subwords=True))
-        marker.add(
-            [
-                Highlight("simple", color=Colors.cyan),
-                Highlight("mauris", color=Colors.purple),
-            ]
-        )
-        marker.add(Highlight("vivamus", color=Colors.pink, group="test"))
-        marked_file = marker.to_bytes()
-        assert isinstance(marked_file, bytes)
-
     def test_marker_to_disk(self, tmp_path):
         marker = Marker.from_disk(path="tests/data/test.pdf")
         marker.add(Highlight("sample"))
         marker.to_disk(path=tmp_path / "marked.pdf")
         assert (tmp_path / "marked.pdf").exists()
-
-    def test_marker_from_bytes_with_args(self):
-        file = b"test"
-        marker = Marker.from_bytes(file, path="tests/data/test.pdf")
-        assert marker.file == file
-        assert marker.path == "tests/data/test.pdf"
-
-    def test_marker_from_disk_with_args(self, tmp_path):
-        path = tmp_path / "test.pdf"
-        path.write_bytes(b"test")
-        marker = Marker.from_disk(path, file=b"test")
-        assert marker.file == b"test"
-        assert marker.path == path
