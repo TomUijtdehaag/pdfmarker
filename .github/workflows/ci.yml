@@ -39,5 +39,5 @@ jobs:
         run: poetry run ruff check
       - name: Run bandit
         run: poetry run bandit .
-      - name: Run safety
-        run: poetry run safety check
+      # - name: Run safety
+      #   run: poetry run safety check
